@@ -6,7 +6,7 @@ locale support.
 ## Features
 
 - 20+ named date/time pattern constants (`DatePatterns`)
-- Format & parse helpers (`DateFormatter`)
+- Format & parse helpers (`VnDateFormatter`)
 - Vietnamese long-form date string — `"15:30 ngày 25 tháng 3 năm 2026"`
 - Relative-time labels — `"Hôm nay"`, `"Hôm qua"`, `"3 ngày trước"`
 - Vietnamese weekday labels — `"Thứ Hai"` … `"Chủ Nhật"`
@@ -38,32 +38,32 @@ void main() {
 
   // ── Basic formatting ────────────────────────────────────────────────────────
 
-  DateFormatter.formatDateTimeToString(now);
+  VnDateFormatter.formatDateTimeToString(now);
   // → "25/03/2026"
 
-  DateFormatter.convertDateTimeToStringBE(now);
+  VnDateFormatter.convertDateTimeToStringBE(now);
   // → "2026-03-25"
 
-  DateFormatter.formatDateTimeToStringBE(now);
+  VnDateFormatter.formatDateTimeToStringBE(now);
   // → "2026-03-25 15:30:45"
 
-  DateFormatter.convertDateTimeToStringBE(null);
+  VnDateFormatter.convertDateTimeToStringBE(null);
   // → null
 
   // ── Vietnamese long-form ─────────────────────────────────────────────────────
 
-  DateFormatter.convertDateToStringVN(dateTime: now);
+  VnDateFormatter.convertDateToStringVN(dateTime: now);
   // → "15:30 ngày 25 tháng 3 năm 2026"
 
   // ── Relative labels ──────────────────────────────────────────────────────────
 
-  DateFormatter.convertDateVN('2026-03-25'); // → "Hôm nay"
-  DateFormatter.convertDateVN('2026-03-24'); // → "Hôm qua"
-  DateFormatter.convertDateVN('2026-03-22'); // → "3 ngày trước"
-  DateFormatter.convertDateVN('2026-03-01'); // → "01/03/2026"
+  VnDateFormatter.convertDateVN('2026-03-25'); // → "Hôm nay"
+  VnDateFormatter.convertDateVN('2026-03-24'); // → "Hôm qua"
+  VnDateFormatter.convertDateVN('2026-03-22'); // → "3 ngày trước"
+  VnDateFormatter.convertDateVN('2026-03-01'); // → "01/03/2026"
 
   // Custom labels for your own i18n system:
-  DateFormatter.convertDateVN(
+  VnDateFormatter.convertDateVN(
     '2026-03-25',
     todayLabel: 'Today',
     yesterdayLabel: 'Yesterday',
@@ -72,27 +72,27 @@ void main() {
 
   // ── Weekday labels ───────────────────────────────────────────────────────────
 
-  DateFormatter.convertWeekdayVN(null);                  // → "Hôm nay"
-  DateFormatter.convertWeekdayVN(DateTime(2026, 3, 23)); // → "Thứ Hai"
+  VnDateFormatter.convertWeekdayVN(null);                  // → "Hôm nay"
+  VnDateFormatter.convertWeekdayVN(DateTime(2026, 3, 23)); // → "Thứ Hai"
 
   // ── Pattern conversions ──────────────────────────────────────────────────────
 
-  DateFormatter.convertPattern1ToPatternDefault('25/03/2026');
+  VnDateFormatter.convertPattern1ToPatternDefault('25/03/2026');
   // → "2026-03-25"
 
-  DateFormatter.convertPatternDefaultToPattern1('2026-03-25');
+  VnDateFormatter.convertPatternDefaultToPattern1('2026-03-25');
   // → "25/03/2026"
 
-  DateFormatter.convertPatternDefaultToPatternOther(
+  VnDateFormatter.convertPatternDefaultToPatternOther(
     '2026-03-25',
     outPattern: DatePatterns.PATTERN_6,
   ); // → "25/03/2026 00:00"
 
   // ── Miscellaneous ────────────────────────────────────────────────────────────
 
-  DateFormatter.getQuarter(DateTime(2026, 3)); // → 1
-  DateFormatter.getQuarter(DateTime(2026, 7)); // → 3
-  DateFormatter.convertHourToInt('09:30');     // → 930
+  VnDateFormatter.getQuarter(DateTime(2026, 3)); // → 1
+  VnDateFormatter.getQuarter(DateTime(2026, 7)); // → 3
+  VnDateFormatter.convertHourToInt('09:30');     // → 930
 
   // ── DateTime extension ───────────────────────────────────────────────────────
 
@@ -122,7 +122,7 @@ void main() {
 | `PATTERN_13`      | `HH:mm`               | 15:30               |
 | `PATTERN_DEFAULT` | `yyyy-MM-dd`          | 2026-03-25          |
 
-### `DateFormatter` — static methods
+### `VnDateFormatter` — static methods
 
 | Method                                                              | Description                      |
 | ------------------------------------------------------------------- | -------------------------------- |
@@ -155,14 +155,14 @@ The label parameters on `convertDateVN` and `convertWeekdayVN` accept any
 `String`, so you can pass translated values directly:
 
 ```dart
-DateFormatter.convertDateVN(
+VnDateFormatter.convertDateVN(
   dateString,
   todayLabel: LocaleKeys.home_today.tr,
   yesterdayLabel: LocaleKeys.home_yesterday.tr,
   daysAgoLabel: LocaleKeys.notification_daysAgo.tr,
 );
 
-DateFormatter.convertWeekdayVN(
+VnDateFormatter.convertWeekdayVN(
   dateTime,
   todayLabel: LocaleKeys.home_today.tr,
   yesterdayLabel: LocaleKeys.home_yesterday.tr,
